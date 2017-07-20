@@ -2,28 +2,16 @@
 const express = require('express');
 const router = express.Router();
 
-
-module.exports = () => {
-  router.get('/', (req, res) => {
-    let result = [
-      {
-        id : "1",
-        name: "Best Pizza"
-      },
-      {
-        id: "2",
-        name: "Nice Trees"
-      },
-      {
-        id: "3",
-        name:"Cool Shoes"
-      }
-    ];
-    res.json(result);
-  });
-
-
-
+//will add knex to get lists from DB
+module.exports = (knex) => {
+  router.get('/lists', (req, res) => {
+    knex
+      .select("*")
+      .from("lists")
+      .then((results) => {
+        res.json(results);
+      });
+    });
   return router;
 }
 
