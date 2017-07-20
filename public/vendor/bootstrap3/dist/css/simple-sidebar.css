@@ -7,16 +7,14 @@
 /* Toggle Styles */
 
 #wrapper {
-    padding-left: 0px;
+    padding-left: 250px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled {
-    padding-left: 250px;
-}
+
 
 #sidebar-wrapper {
     z-index: 1000;
@@ -27,10 +25,7 @@
     margin-left: -250px;
     overflow-y: auto;
     background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+
 }
 
 
@@ -52,7 +47,7 @@
     position: absolute;
     top: 0;
     width: 250px;
-    margin: 0;
+    margin: 15px;
     padding: 0;
     list-style: none;
 }
@@ -99,7 +94,7 @@
         padding-left: 0;
     }
 
-    #wrapper.toggled {
+    #wrapper{
         padding-left: 250px;
     }
 
@@ -107,7 +102,7 @@
         width: 0;
     }
 
-    #wrapper.toggled #sidebar-wrapper {
+  #sidebar-wrapper {
         width: 250px;
     }
 
@@ -116,7 +111,7 @@
         position: relative;
     }
 
-    #wrapper.toggled #page-content-wrapper {
+    #page-content-wrapper {
         position: relative;
         margin-right: 0;
     }
