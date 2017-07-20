@@ -1,0 +1,11 @@
+.header-wrapper {
+  background:black;
+  height: 75px;
+}
+
+.header-wrapper h3 {
+  color: white;
+}
+.form-horizontal {
+  padding-top: 15px;
+}
