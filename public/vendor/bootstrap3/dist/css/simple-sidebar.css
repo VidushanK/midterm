@@ -4,23 +4,12 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-/* Toggle Styles */
-
-#wrapper {
-    padding-left: 250px;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    width: 250px;
+    width: 350px;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
@@ -28,25 +17,12 @@
 
 }
 
-
-
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}
-
-#page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
-
 /* Sidebar Styles */
 
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 350px;
     margin: 15px;
     padding: 0;
     list-style: none;
@@ -90,29 +66,13 @@
 }
 
 @media(min-width:768px) {
-    #wrapper {
-        padding-left: 0;
-    }
-
-    #wrapper{
-        padding-left: 250px;
-    }
 
     #sidebar-wrapper {
         width: 0;
     }
 
   #sidebar-wrapper {
-        width: 250px;
+        width: 350px;
     }
 
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
 }
