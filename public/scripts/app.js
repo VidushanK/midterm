@@ -3,7 +3,7 @@ $(document).ready(function(){
     // For creating content of infoWindow
     function createWindowContent() {
       return `<div>
-      <form id="info_window_input" action="/list" method="post">
+      <form id="info_window_input" action="/lists/:id/points" method="post">
           <textarea class="test" name="text"></textarea>
           <input type="submit" value="Submit">
         </form>
