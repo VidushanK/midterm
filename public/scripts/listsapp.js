@@ -1,10 +1,15 @@
 $(function(){
 
-var listMenu = $(".list-container");
+  var listMenu = $(".new-list");
+
   function addListToMenu(list) {
-    listMenu.append(`<li class="${list.id}">${list.name}</li>`);
+    listMenu.append(`<li> <button id="list-item-${list.id}">${list.name}</button> </li>`);
+    $(`#list-item-${list.id}`).bind('click',list, function(event){
+      loadPoints(event.data.id);
+    });
   }
-  function loadLists(){
+
+  function loadLists() {
     $.ajax({
       url: "/lists",
       method: "GET",
@@ -15,19 +20,20 @@ var listMenu = $(".list-container");
 
   loadLists();
 
+  function addPointsToList(point) {
+    $(`#list-item-${point.list_id}`).append(`<li>${point.name}</li>`);
+  }
 
-  // function addPointsToList(points) {
+  function loadPoints(list_id) {
+    $.ajax({
+      url: '/points',
+      data: {
+        list_id: list_id
+      },
+      method: "GET"
+    }).done(function(points){
+      points.forEach(addPointsToList);
+    });
+  }
 
-  // }
-
-  // function loadPoints(){
-  //   $.ajax({
-  //     url: '/points',
-  //     method: "GET"
-  //   }).done(function(points){
-  //     points.forEach(addPointsToList);
-  //   });
-  // }
-
-  // $('.list-item').click(loadPoints);
-}
+});
