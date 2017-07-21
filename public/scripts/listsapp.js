@@ -1,5 +1,5 @@
 $(function(){
-var listMenu = $(".contain-lists");
+var listMenu = $(".list-container");
   function addListToMenu(list) {
     listMenu.append(`<li>${list.name}</li>`);
   }
