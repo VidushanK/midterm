@@ -6,23 +6,22 @@ const router = express.Router();
 module.exports = (knex) => {
 
   router.get('/', (req, res) => {
-    res.render("index")
     knex
     .select("*")
     .from("lists")
     .then((results) => {
-      res.json(results);
+      res.render("index",{maps: results});
     });
   });
 
   router.get("/:id", (req, res) => {
-    res.render("maps_show");
     knex
     .select("id")
     .from("lists")
-    .where("id",1)
-    .then((results) => {
-      res.json(results);
+    .where("id",req.params.id)
+    .limit(1)
+    .then(([result]) => {
+      res.render("maps_show",{map: result});
     });
   });
 
@@ -31,15 +30,14 @@ module.exports = (knex) => {
   });
 
   router.get("/:id/edit", (req, res) => {
-
-    knex
-    .select("id")
-    .from("lists")
-    .where("id",1)
-    .then((results) => {
-      res.json(results);
+    Promise.all([
+      knex('lists').where({id: req.params.id}),
+      knex('points').where({list_id: req.params.id})
+      ]).then(([[list], points]) => {
+        res.render('map', {map, points});
+      });
     });
-  });
 
   return router;
+
 }
