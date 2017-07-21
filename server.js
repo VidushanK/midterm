@@ -44,17 +44,17 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get('/register', (req,res) => {
-  res.render("register");
-});
+// app.get('/register', (req,res) => {
+//   res.render("register");
+// });
 
-app.get('/login', (req,res) => {
-  res.render("login");
-});
+// app.get('/login', (req,res) => {
+//   res.render("login");
+// });
 
 // Mount all resource routes
-// app.use("/",register);
-// app.use("/",login);
+app.use("/resgister",register);
+app.use("/login",login);
 app.use("/maps",mapsRoutes);
 app.use("/points",pointRoutes);
 
