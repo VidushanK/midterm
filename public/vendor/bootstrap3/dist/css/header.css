@@ -1,6 +1,13 @@
 .header-wrapper {
-  background:black;
+  background:#404142;
   height: 75px;
+  font-family: 'Roboto Condensed', sans-serif;
+  position: fixed;
+  overflow:auto;
+  width: auto;
+  top: 0px;
+  right: 0;
+  left: 0;
 }
 
 .header-wrapper h3 {
