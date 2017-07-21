@@ -18,7 +18,7 @@ module.exports = (knex) => {
     knex
     .select("id")
     .from("lists")
-    .where("id",req.params.id)
+    .where("id", Number(req.params.id))
     .limit(1)
     .then(([result]) => {
       res.render("maps_show",{map: result});

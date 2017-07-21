@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
 // });
 
 // Mount all resource routes
-app.use("/resgister",register);
+app.use("/register",register);
 app.use("/login",login);
 app.use("/maps",mapsRoutes);
 app.use("/points",pointRoutes);
