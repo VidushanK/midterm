@@ -3,11 +3,17 @@ $(function(){
   var listMenu = $(".new-list");
 
   function addListToMenu(list) {
-    listMenu.append(`<li> <button id="list-item-${list.id}">${list.name}</button> </li>`);
-    $(`#list-item-${list.id}`).bind('click',list, function(event){
-      loadPoints(event.data.id);
-    });
+    listMenu.append(`<li>
+      <div class="list-button btn btn-default" data-id="${list.id}">${list.name}</div>
+      <div class="list-points"></div>
+      </li>`);
   }
+
+
+  $('.list-button').ready(function(){
+
+    loadPoints($(this).data("id"));
+  });
 
   function loadLists() {
     $.ajax({
@@ -20,8 +26,9 @@ $(function(){
 
   loadLists();
 
-  function addPointsToList(point) {
-    $(`#list-item-${point.list_id}`).append(`<li>${point.name}</li>`);
+  function addPointToList(point,listPoints) {
+
+    listPoints.append(`<div>${point.name}</div>`);
   }
 
   function loadPoints(list_id) {
@@ -32,7 +39,11 @@ $(function(){
       },
       method: "GET"
     }).done(function(points){
-      points.forEach(addPointsToList);
+      var listPoints = $(`[data-id=${list_id}]`).parent().find(".list-points");
+      listPoints.empty()
+      points.forEach(function(point){
+        addPointToList(point,listPoints);
+      });
     });
   }
 

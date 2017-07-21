@@ -13,15 +13,18 @@ module.exports = (knex) => {
     });
   });
 
-  // router.get("/:id", (req, res) => {
-  //   knex
-  //   .select("id")
-  //   .from("lists")
-  //   .where("id",1)
-  //   .then((results) => {
-  //     res.json(results);
-  //   });
-  // })
+  router.get("/:id", (req, res) => {
+
+    //TODO: if the map exists
+    knex
+    .select("id")
+    .from("lists")
+    .where("id",1)
+    .then((results) => {
+      res.json(results);
+    });
+  })
   return router;
 }
+
 

@@ -17,8 +17,10 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const register = require("./routes/register");
 const login = require("./routes/login");
-const listRoutes = require('./routes/lists')(knex);
-const pointRoutes = require("./routes/points")(knex);
+const mapsRoutes = require('./routes/maps')(knex);
+const pointRoutes = require("./routes/points")(knex);//not sure if we need this anymore
+const usersRoutes = require("./routes/users")(knex);
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -53,7 +55,7 @@ app.get('/login', (req,res) => {
 // Mount all resource routes
 // app.use("/",register);
 // app.use("/",login);
-app.use("/lists",listRoutes);
+app.use("/maps",mapsRoutes);
 app.use("/points",pointRoutes);
 
 
