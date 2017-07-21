@@ -13,10 +13,11 @@
     left: 250px;
     width: 350px;
     height: 100%;
+    top:75px;
     margin-left: -250px;
     overflow-y: auto;
     background: #28292a;
-  font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 
 }
 textarea {
