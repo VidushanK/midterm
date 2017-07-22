@@ -51,12 +51,19 @@ module.exports = (knex) => {
     const { name, lat, long } = req.body;
     knex('points').insert({
       name, lat, long, list_id: req.params.id
-    }).then(() => {
-      res.json({
-        success: 'ok'
-      })
-    })
-  })
+    }).returning('id')
+    .then((id) => {
+      const newPoint = {
+        name: name,
+        lat: lat,
+        long: long,
+        id: id,
+        list_id: req.params.id
+      };
+      res.status(201).send({point: newPoint});
+    });
+  });
+
 
   return router;
 
