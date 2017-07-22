@@ -30,7 +30,15 @@ module.exports = (knex) => {
   });
 
   router.post("/",(req, res) => {
-    res.redirect("/");
+    var listName = req.body.mapname;
+    knex('lists').insert({
+      name: listName,
+      id: 12
+    }).then(() => {
+      res.json({
+        success: 'ok'
+      })
+    })
   });
 
   router.get("/:id/points", (req, res) => {
