@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link href="/vendor/bootstrap3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/bootstrap3/dist/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/bootstrap3/dist/css/header.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <style>
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      margin: 0;
+      color: #244751;
+      background-color: #eee;
+      height: 100%;
+    }
+      main.body-wrapper {
+        padding-bottom: 100%;
+        background-color: gray;
+        margin: 130px auto;
+        width:450px;
+      }
+    .mapNameContainer{
+      margin-left: 45px;
+    }
+    </style>
+    <title> Map </title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+
+      <header class ="header-wrapper">
+        <div class="col-sm-11">
+          <h3> tinyMapp </h3>
+        </div>
+        <form class="form-horizontal" action='/logout' method='POST'>
+            <button type="submit" class="btn btn-default">Logout</button>
+        </form>
+      </header>
+      <main class ="body-wrapper">
+        <form class="new-map-form" method= "post", action="/maps/:id">
+          <textarea class="new-map-text" name="text" placeholder="Enter map name here.."> </textarea>
+          <input type="submit" value="Create Map">
+        </form>
+        <br>
+        <section class ="mapNameContainer" style="background:gray;">
+          <h4>Check dem maps out</h4>
+          <ul>
+            <% for(var id in maps) { %>
+            <li>
+              <a href="/maps/<%=id%>"> map <%=id%> </a>
+            </li>
+            <form method="POST" action="/maps/<%=id%>/delete"><input type = "submit" value = "Delete"></form>
+            <% }; %>
+          </ul>
+        </section>
+      </main>
+
+    </div>
+
+    <script src="/vendor/bootstrap3/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

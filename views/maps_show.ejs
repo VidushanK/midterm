@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+    <link href="/vendor/bootstrap3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/bootstrap3/dist/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/bootstrap3/dist/css/header.css" rel="stylesheet" type="text/css"/>
+    <style>
+      #map{
+        height: 750px;
+        width: 100%;
+        margin-left:350px;
+        margin-top: 75px;
+        position: fixed;
+        bottom:0;
+        z-index: 0;
+      }
+    </style>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/listsapp.js"></script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class ="header-wrapper">
+        <div class="col-sm-11">
+          <h3> USERNAME </h3>
+        </div>
+        <form class="form-horizontal" action='/logout' method='POST'>
+            <button type="submit" class="btn btn-default">Logout</button>
+        </form>
+      </header>
+      <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li>
+              <form method="POST" action="/create">
+                <button type="submit" class="btn btn-default">Create</button>
+            <textarea name="text" placeholder=" "></textarea>
+              </form>
+            </li>
+              <div class="new-list" style="background-color:white;color:black;padding:20px;margin-right: 50px;">
+                  <span class="listPoints">test</span>
+              </div>
+            </li>
+            <li>
+              <form method="POST" action="/save">
+                <button type="submit" class="btn btn-default">Save</button>
+              </form>
+            <li>
+          </ul>
+          <div class="list-container"></div>
+      </div>
+      <div class="page-content-wrapper">
+          <div id="map"></div>
+      </div>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="/vendor/bootstrap3/dist/js/bootstrap.min.js"></script>
+  </body>
+  </html>
