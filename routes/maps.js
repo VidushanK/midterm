@@ -33,11 +33,9 @@ module.exports = (knex) => {
     var listName = req.body.mapname;
     knex('lists').insert({
       name: listName,
-      id: 12
+      id: 1000
     }).then(() => {
-      res.json({
-        success: 'ok'
-      })
+      res.redirect("/maps");
     })
   });
 
