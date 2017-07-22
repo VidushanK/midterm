@@ -11,31 +11,29 @@
     <link href="/vendor/bootstrap3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/vendor/bootstrap3/dist/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
     <link href="/vendor/bootstrap3/dist/css/header.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/vendor/bootstrap3/dist/css/map.css">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <title> Map </title>
     <style>
-    body {
-      font-family: 'Roboto Condensed', sans-serif;
-      margin: 0;
-      color: #244751;
-      background-color: #eee;
-      height: 100%;
+    .col a{
+      position: relative;
+      right: 50px;
     }
-      main.body-wrapper {
-        padding-bottom: 100%;
-        background-color: gray;
-        margin: 130px auto;
-        width:450px;
-      }
-    .mapNameContainer{
-      margin-left: 45px;
+    .test {
+      position: relative;
+    }
+    .item {
+      padding-bottom: 15px;
+    }
+    .remove {
+      margin-left: 350px;
     }
     </style>
-    <title> Map </title>
   </head>
 
   <body>
-    <div class="wrapper">
+    <div class="container">
 
       <header class ="header-wrapper">
         <div class="col-sm-11">
@@ -45,22 +43,30 @@
             <button type="submit" class="btn btn-default">Logout</button>
         </form>
       </header>
+
       <main class ="body-wrapper">
         <form class="new-map-form" action="/maps" method="POST">
-          <textarea name="mapname" class="list-name-input" placeholder="Enter the name of your map"></textarea>
-          <input type="submit" value="Create Map">
+          <textarea name="mapname" class="form-group" placeholder="Enter the name of your map"></textarea>
+
+          <input class="btn btn-danger black-background white btn-block"type="submit" value="Create Map">
         </form>
         <br>
-        <section class ="mapNameContainer" style="background:gray;">
+        <section class ="mapNameContainer">
           <h4>Check dem maps out</h4>
-          <ul>
-            <% for(var id in maps) { %>
-            <li>
-              <a href="/maps/<%=id%>"> map <%=id%> </a>
-            </li>
-            <form method="POST" action="/maps/<%=id%>/delete"><input type = "submit" value = "Delete"></form>
-            <% }; %>
-          </ul>
+          <div class ="container">
+            <ul>
+              <div class = "col">
+              <% for(var id in maps) { %>
+              <li class="item">
+              <a class="col-sm-1 test" href="/maps/<%=id%>"> <%=maps[id].name%> </a>
+              <form method="POST" action="/maps/<%=id%>/delete">
+                    <button class="remove btn btn-default glyphicon glyphicon-remove">Remove</button>
+              </form>
+              </li>
+              <% }; %>
+            </div>
+            </ul>
+          </div>
         </section>
       </main>
 
