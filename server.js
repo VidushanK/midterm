@@ -18,7 +18,7 @@ const knexLogger  = require('knex-logger');
 const register = require("./routes/register");
 const login = require("./routes/login");
 const mapsRoutes = require('./routes/maps')(knex);
-const pointRoutes = require("./routes/points")(knex);//not sure if we need this anymore
+//const pointRoutes = require("./routes/points")(knex);//not sure if we need this anymore
 const usersRoutes = require("./routes/users")(knex);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
 app.use("/register",register);
 app.use("/login",login);
 app.use("/maps",mapsRoutes);
-app.use("/points",pointRoutes);
+//app.use("/points",pointRoutes);
 
 
 

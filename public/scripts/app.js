@@ -10,6 +10,14 @@ $(document).ready(function(){
       </div>`;
     }
 
+
+    function postMarker(marker) {
+      var mapId = Number(window.location.pathname.substr('/maps'.length + 1));
+
+      $.ajax('/maps/' + mapId + '/points', )
+    }
+
+
     //For adding marker
     function addMarker(point){
       var marker = new google.maps.Marker({

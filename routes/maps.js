@@ -10,7 +10,7 @@ module.exports = (knex) => {
     .select("*")
     .from("lists")
     .then((results) => {
-      res.render("index",{maps: results});
+      res.render("maps",{maps: results});
     });
   });
 
@@ -21,7 +21,7 @@ module.exports = (knex) => {
     .where("id", Number(req.params.id))
     .limit(1)
     .then(([result]) => {
-      res.render("maps_show",{map: result});
+      res.render("index",{map: result});
     });
   });
 
@@ -29,14 +29,27 @@ module.exports = (knex) => {
     res.render("maps_new");
   });
 
-  router.get("/:id/edit", (req, res) => {
-    Promise.all([
-      knex('lists').where({id: req.params.id}),
-      knex('points').where({list_id: req.params.id})
-      ]).then(([[list], points]) => {
-        res.render('map', {map, points});
-      });
-    });
+  router.post("/",(req, res) => {
+    console.log(req.body);
+    res.redirect("/");
+  });
+
+  router.get("/:id/points", (req, res) => {
+    knex('points').where('list_id', req.params.id).then(points => {
+      res.json(points);
+    })
+  });
+
+  router.post("/:id/points", (req, res) => {
+    const { name, lat, long } = req.body;
+    knex('points').insert({
+      name, lat, long, list_id: req.params.id
+    }).then(() => {
+      res.json({
+        success: 'ok'
+      })
+    })
+  })
 
   return router;
 
