@@ -13,7 +13,6 @@
     <link href="/vendor/bootstrap3/dist/css/header.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/vendor/bootstrap3/dist/css/map.css">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/aap.js"></script>
     <title> Map </title>
     <style>
 
@@ -43,9 +42,9 @@
               <div class = "col">
               <% for(var id in maps) { %>
               <li class="item">
-              <a class="col-sm-1 test" href="/maps/<%=id%>"> <%=maps[id].name%> </a>
-              <form method="POST" action="/maps/<%=id%>/delete">
-                <button class=" color remove btn btn-danger background glyphicon glyphicon-remove"></button>
+              <a class="col-sm-1" name="listname" href="/maps/<%=maps[id].id%>"> <%=maps[id].name%> </a>
+              <form method="POST" action="/maps/<%=maps[id].id%>/delete">
+                <button class=" color remove btn btn-danger background glyphicon glyphicon-remove" ></button>
               </form>
               </li>
               <% }; %>

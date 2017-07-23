@@ -47,6 +47,21 @@ module.exports = (knex) => {
     })
   });
 
+  router.post("/:id/delete", (req,res) => {
+    console.log(Number(req.params.id));
+    var list =  knex('lists').select('name')
+    .where({'id' : req.params.id})
+    .del()
+    .then(function (count) {
+      console.log(list);
+      console.log(count);
+
+      res.redirect('/maps')
+    });
+  });
+
+
+
   router.post("/:id/points", (req, res) => {
     const { name, lat, long } = req.body;
     knex('points').insert({
