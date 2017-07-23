@@ -19,7 +19,9 @@ $(document).ready(function(){
       $(".list-container").append($listItem);
     }
 
-    function postPoint($form){
+    function postPoint($form, event){
+      event.preventDefault();
+      console.log($form.serialize());
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points`,
@@ -29,7 +31,8 @@ $(document).ready(function(){
       })
     }
 
-    function updatePoint($form, data){
+    function updatePoint($form, data, event){
+      event.preventDefault;
       var newValue = {
         id: data.id,
         name: $form.name,
@@ -39,7 +42,7 @@ $(document).ready(function(){
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/update`,
-        data: newValue.serialize()
+        data: $.param(newValue)
       }).done(() => {
         loadMap(mapId);
       })
@@ -51,7 +54,7 @@ $(document).ready(function(){
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/delete`,
-        data: data.serialize()
+        data: $.param(data)
       }).done(()=>{
         loadMap(mapId);
       })
@@ -66,13 +69,12 @@ $(document).ready(function(){
     }
 
     function pointExists(event){
-      event.preventDefault();
       const data = event.data;
       const $form = $(this);
       if(!data.id){
-        postPoint($form);
+        postPoint($form, event);
       } else {
-        updatePoint($form, data);
+        updatePoint($form, data, event);
       }
     }
 
