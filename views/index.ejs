@@ -30,19 +30,10 @@
       </header>
       <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
-              <div class="new-list">
-                  <span class="listPoints"></span>
-              </div>
+            <li>
+              <a href= "/maps/points"> Edit </a>
+              <a href="/maps">Create more maps!</a>
             </li>
-            <li>
-              <form method="POST" action="/save">
-                <button type="submit" class="btn btn-default">Save</button>
-              </form>
-              <form method="POST" action="/maps/points">
-                <button type="submit" class="btn btn-default">Edit</button>
-              </form>
-              <a href="/maps">Create more maps!</a><br>
-            <li>
           </ul>
           <div class="list-container"></div>
       </div>
@@ -50,7 +41,7 @@
           <div id="map"></div>
       </div>
     </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyhZszVHyOZzJBDX2cmcBpv2FR2VbkGB4"></script>
     <script src="/vendor/bootstrap3/dist/js/bootstrap.min.js"></script>
   </body>
   </html>
