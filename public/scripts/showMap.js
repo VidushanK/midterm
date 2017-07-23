@@ -19,9 +19,9 @@ $(document).ready(function(){
       $(".list-container").append($listItem);
     }
 
-    function postPoint($form, event){
+    function postPoint(event){
       event.preventDefault();
-      console.log($form.serialize());
+      const $form = $(this);
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points`,
@@ -31,8 +31,10 @@ $(document).ready(function(){
       })
     }
 
-    function updatePoint($form, data, event){
-      event.preventDefault;
+    function updatePoint(event){
+      event.preventDefault();
+      const data = event.data;
+      const $form = $(this);
       var newValue = {
         id: data.id,
         name: $form.name,
@@ -68,16 +70,6 @@ $(document).ready(function(){
       })
     }
 
-    function pointExists(event){
-      const data = event.data;
-      const $form = $(this);
-      if(!data.id){
-        postPoint($form, event);
-      } else {
-        updatePoint($form, data, event);
-      }
-    }
-
     //For adding marker
     function addMarker(pointObj){
       marker = new google.maps.Marker({
@@ -97,10 +89,11 @@ $(document).ready(function(){
           var content = '';
           if(pointObj.id){
             content = createWindowContent(pointObj, "Update", "block");
+            $('#info_window_input').on('submit', pointObj, updatePoint);
           } else {
             content = createWindowContent(pointObj, "Submit", "none");
+            $('#info_window_input').on('submit', postPoint);
           }
-          $('#info_window_input').on('submit', pointObj, pointExists);
           $('.info_window_delete_button').on('click', pointObj, deletePoint);
           infoWindow.setContent(content);
           infoWindow.open(map, marker);
