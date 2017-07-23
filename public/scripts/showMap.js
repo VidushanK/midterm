@@ -22,20 +22,24 @@ $(document).ready(function(){
     }
 
     function postPoint(){
-      event.preventDefault();
-      if (isValid()) {
-        const $form = $(this);
-        $.ajax({
-          type: 'POST',
-          url: '/maps/:id/points',
-          data: $form.serialize()
-        }).done(() => {
-          $(".info_window_confirmation").attr('style', 'display: block');
-        });
-      }
+      return $.ajax({
+        type: 'POST',
+        url: '/maps/:id/points',
+        data: $form.serialize()
+      }).done(() => {
+        alert("Point submitted!");
+      })
     }
 
-    // function updatePoint()
+    function updatePoint(){
+      return $.ajax({
+        type: 'POST',
+        url: 'maps/:id/points/update',
+        data: $form.serialize()
+      }).done(() => {
+        alert("Point updated!");
+      })
+    }
 
     function loadMap(mapId){
       // var fakeJSON = [
@@ -62,13 +66,17 @@ $(document).ready(function(){
       })
     }
 
-    // function pointExists(pointObj){
-    //   if (pointObj.id){
-    //     return updatePoint;
-    //   } else {
-    //     return postPoint;
-    //   }
-    // }
+    function pointExists(pointObj){
+      event.preventDefault();
+      if (isValid()) {
+        const $form = $(this);
+        if(!pointObj.id){
+          postPoint();
+        } else {
+          updatePoint();
+        }
+      }
+    }
 
     //For adding marker
     function addMarker(pointObj){
@@ -89,7 +97,7 @@ $(document).ready(function(){
           marker.setPosition({lat, lng});
           var content = createWindowContent(pointObj);
           infoWindow.setContent(content);
-          $('.info_window_input').on('submit', postPoint);
+          $('.info_window_input').on('submit', pointExists(pointObj));
           infoWindow.open(map, marker)
         }
       })(marker, pointObj))
