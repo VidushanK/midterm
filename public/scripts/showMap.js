@@ -6,35 +6,26 @@ $(document).ready(function(){
           <textarea class="info_window_textarea" name="pointName">${pointObj.name}</textarea>
           <input type="hidden" name="pointLat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="pointLng" class="info_window_lng" value=${pointObj.long}>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="info_window_button">
           <span class="info_window_confirmation" style="display: none">Submitted!</span>
         </form>
       </div>`;
     }
 
-    function isValid() {
-      var charLength = $(".info_window_textarea").val().length;
-      if (!charLength) {
-        alert("Empty form")
-        return false;
-      }
-      return true;
-    }
-
-    function postPoint(){
-      return $.ajax({
+    function postPoint($form){
+      $.ajax({
         type: 'POST',
-        url: '/maps/:id/points',
+        url: `/maps/${mapId}/points`,
         data: $form.serialize()
       }).done(() => {
         alert("Point submitted!");
       })
     }
 
-    function updatePoint(){
-      return $.ajax({
+    function updatePoint($form){
+      $.ajax({
         type: 'POST',
-        url: 'maps/:id/points/update',
+        url: `/maps/${mapId}/points/update`,
         data: $form.serialize()
       }).done(() => {
         alert("Point updated!");
@@ -42,62 +33,41 @@ $(document).ready(function(){
     }
 
     function loadMap(mapId){
-      // var fakeJSON = [
-      // {
-      //   name: "Tacofino",
-      //   lat: 49.2827237,
-      //   long: -123.1070068,
-      //   list_id: 1
-      // },
-      // {
-      //   name: "Steamworks",
-      //   lat: 49.2831926,
-      //   long: -123.1106117,
-      //   list_id: 1
-      // }];
-      // fakeJSON.forEach((point)=>{
-      //   addMarker(point);
-      // })
-      $.getJSON(`maps/${mapId}/points`).done((mapPoints)=>{
-        locations = mapPoints;
+      $.getJSON(`${mapId}/points`).done((mapPoints)=>{
         mapPoints.forEach((point)=>{
           addMarker(point);
         })
       })
     }
 
-    function pointExists(pointObj){
+    function pointExists(event){
       event.preventDefault();
-      if (isValid()) {
-        const $form = $(this);
-        if(!pointObj.id){
-          postPoint();
-        } else {
-          updatePoint();
-        }
+      var data = event.data;
+      const $form = $(this);
+      if(!data.id){
+        $(".info_window_button").attr("value","Submit");
+        postPoint($form);
+      } else {
+        $(".info_window_button").attr("value","Update");
+        updatePoint($form);
       }
     }
 
     //For adding marker
     function addMarker(pointObj){
-      var lat = pointObj.lat;
-      var lng = pointObj.long;
-      var position = {lat, lng};
       marker = new google.maps.Marker({
-        position: position,
+        position: {lat: Number(pointObj.lat), lng: Number(pointObj.long)},
         map: map,
         draggable: true
       });
 
       google.maps.event.addListener(marker, 'click', (function(marker, pointObj){
         return function(){
-          var lat = this.getPosition().lat();
-          var lng = this.getPosition().lng();
           infoWindow.close();
-          marker.setPosition({lat, lng});
+          marker.setPosition({lat: this.getPosition().lat(),lng: this.getPosition().lng()});
           var content = createWindowContent(pointObj);
+          $('.info_window_input').on('submit', pointObj, pointExists);
           infoWindow.setContent(content);
-          $('.info_window_input').on('submit', pointExists(pointObj));
           infoWindow.open(map, marker)
         }
       })(marker, pointObj))
@@ -118,7 +88,8 @@ $(document).ready(function(){
     var map = new google.maps.Map(document.getElementById('map'), options);
     var infoWindow = new google.maps.InfoWindow();
     // remove the "/maps" part from the path to extract the map id
-    var mapId = window.location.pathname.slice(5);
+    var mapId = window.location.pathname.slice(6);
+    console.log(mapId);
     var locations = [];
     loadMap(mapId);
 
