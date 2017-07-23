@@ -22,11 +22,17 @@ $(document).ready(function(){
       })
     }
 
-    function updatePoint($form){
+    function updatePoint($form, data){
+      var newValue = {
+        id: data.id,
+        name: $form.name,
+        lat: $form.lat,
+        long: $form.long
+      };
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/update`,
-        data: $form.serialize()
+        data: newValue.serialize();
       }).done(() => {
         loadMap(mapId);
       })
@@ -35,11 +41,10 @@ $(document).ready(function(){
     function deletePoint(event){
       event.preventDefault();
       const data = event.data;
-      const $form = $(document).getElementById("info_window_input");
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/delete`,
-        data: $form.serialize()
+        data: data.serialize();
       }).done(()=>{
         loadMap(mapId);
       })
@@ -60,7 +65,7 @@ $(document).ready(function(){
       if(!data.id){
         postPoint($form);
       } else {
-        updatePoint($form);
+        updatePoint($form, data);
       }
     }
 
