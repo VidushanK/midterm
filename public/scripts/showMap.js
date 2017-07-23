@@ -2,12 +2,11 @@ $(document).ready(function(){
     // For creating content of infoWindow
     function createWindowContent(pointObj) {
       return `<div>
-      <form class="info_window_input" action="/maps/:id/points" method="post">
+      <form class="info_window_input" action="/maps/${mapId}/points" method="post">
           <textarea class="info_window_textarea" name="pointName">${pointObj.name}</textarea>
           <input type="hidden" name="pointLat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="pointLng" class="info_window_lng" value=${pointObj.long}>
           <input type="submit" value="Submit" class="info_window_button">
-          <span class="info_window_confirmation" style="display: none">Submitted!</span>
         </form>
       </div>`;
     }
