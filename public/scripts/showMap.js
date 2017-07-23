@@ -1,13 +1,14 @@
 $(document).ready(function(){
     // For creating content of infoWindow
-    function createWindowContent(pointObj) {
+    function createWindowContent(pointObj, buttonVal) {
       return `<div>
       <form class="info_window_input" action="/maps/${mapId}/points" method="post">
           <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
           <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
-          <input type="submit" value="Submit" class="info_window_button">
+          <input type="submit" value="${buttonVal}" class="info_window_button">
         </form>
+        <button>Delete</
       </div>`;
     }
 
@@ -17,7 +18,7 @@ $(document).ready(function(){
         url: `/maps/${mapId}/points`,
         data: $form.serialize()
       }).done(() => {
-        alert("Point submitted!");
+        loadMap(mapId);
       })
     }
 
@@ -27,7 +28,7 @@ $(document).ready(function(){
         url: `/maps/${mapId}/points/update`,
         data: $form.serialize()
       }).done(() => {
-        alert("Point updated!");
+        loadMap(mapId);
       })
     }
 
@@ -44,10 +45,8 @@ $(document).ready(function(){
       var data = event.data;
       const $form = $(this);
       if(!data.id){
-        $(".info_window_button").attr("value","Submit");
         postPoint($form);
       } else {
-        $(".info_window_button").attr("value","Update");
         updatePoint($form);
       }
     }
@@ -64,7 +63,12 @@ $(document).ready(function(){
         return function(){
           infoWindow.close();
           marker.setPosition({lat: this.getPosition().lat(),lng: this.getPosition().lng()});
-          var content = createWindowContent(pointObj);
+          var content = '';
+          if(pointObj.id){
+            content = createWindowContent(pointObj, "Update");
+          } else {
+            content = createWindowContent(pointObj,"Submit");
+          }
           $('.info_window_input').on('submit', pointObj, pointExists);
           infoWindow.setContent(content);
           infoWindow.open(map, marker)
