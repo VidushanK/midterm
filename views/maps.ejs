@@ -15,26 +15,9 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <title> Map </title>
-    <style>
-    .col a{
-      position: relative;
-      right: 50px;
-    }
-    .test {
-      position: relative;
-    }
-    .item {
-      padding-bottom: 15px;
-    }
-    .remove {
-      margin-left: 350px;
-    }
-    </style>
   </head>
-
   <body>
     <div class="container">
-
       <header class ="header-wrapper">
         <div class="col-sm-11">
           <h3> tinyMapp </h3>
@@ -43,7 +26,6 @@
             <button type="submit" class="btn btn-default">Logout</button>
         </form>
       </header>
-
       <main class ="body-wrapper">
         <form class="new-map-form" action="/maps" method="POST">
           <textarea name="mapname" class="form-group" placeholder="Enter the name of your map"></textarea>
@@ -60,7 +42,7 @@
               <li class="item">
               <a class="col-sm-1 test" href="/maps/<%=id%>"> <%=maps[id].name%> </a>
               <form method="POST" action="/maps/<%=id%>/delete">
-                    <button class="remove btn btn-default glyphicon glyphicon-remove">Remove</button>
+                <button class="remove btn btn-default glyphicon glyphicon-remove">Remove</button>
               </form>
               </li>
               <% }; %>
@@ -69,9 +51,7 @@
           </div>
         </section>
       </main>
-
     </div>
-
     <script src="/vendor/bootstrap3/dist/js/bootstrap.min.js"></script>
   </body>
 </html>

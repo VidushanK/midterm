@@ -20,9 +20,25 @@
     font-family: 'Roboto Condensed', sans-serif;
 
 }
+#map{
+  height: 750px;
+  width: 100%;
+  margin-left:350px;
+  margin-top: 75px;
+  position: fixed;
+  bottom:0;
+  z-index: 0;
+}
 textarea {
   width:300px;
   height: 35px;
+}
+
+.new-list{
+  background-color: white;
+  color: black;
+  padding: 20px;
+  margin-right: 50px;
 }
 /* Sidebar Styles */
 

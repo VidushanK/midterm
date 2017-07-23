@@ -50,3 +50,16 @@ font-size: 30px;
 .white{
   color: white;
 }
+.col a{
+  position: relative;
+  right: 50px;
+}
+.test {
+  position: relative;
+}
+.item {
+  padding-bottom: 15px;
+}
+.remove {
+  margin-left: 350px;
+}
