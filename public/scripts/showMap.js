@@ -12,6 +12,13 @@ $(document).ready(function(){
       </div>`;
     }
 
+    function createListItem(pointObj){
+      var $listItem =  `<div>
+        <span>${pointObj.name}</span>
+      </div>`;
+      $(".list-container").append($listItem);
+    }
+
     function postPoint($form){
       $.ajax({
         type: 'POST',
@@ -32,7 +39,7 @@ $(document).ready(function(){
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/update`,
-        data: newValue.serialize();
+        data: newValue.serialize()
       }).done(() => {
         loadMap(mapId);
       })
@@ -44,7 +51,7 @@ $(document).ready(function(){
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/delete`,
-        data: data.serialize();
+        data: data.serialize()
       }).done(()=>{
         loadMap(mapId);
       })
@@ -76,6 +83,10 @@ $(document).ready(function(){
         map: map,
         draggable: true
       });
+
+      if(pointObj.id){
+        createListItem(pointObj);
+      }
 
       google.maps.event.addListener(marker, 'click', (function(marker, pointObj){
         return function(){
