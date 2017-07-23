@@ -41,26 +41,21 @@ module.exports = (knex) => {
     });
   });
 
+
+  router.post("/:id/delete", (req,res) => {
+    knex('lists').select('name')
+    .where({'id' : req.params.id})
+    .del()
+    .then(function (count) {
+      res.redirect('/maps');
+    });
+  });
+
   router.get("/:id/points", (req, res) => {
     knex('points').where('list_id', req.params.id).then(points => {
       res.json(points);
     })
   });
-
-  router.post("/:id/delete", (req,res) => {
-    console.log(Number(req.params.id));
-    var list =  knex('lists').select('name')
-    .where({'id' : req.params.id})
-    .del()
-    .then(function (count) {
-      console.log(list);
-      console.log(count);
-
-      res.redirect('/maps')
-    });
-  });
-
-
 
   router.post("/:id/points", (req, res) => {
     const { name, lat, long } = req.body;
@@ -75,10 +70,35 @@ module.exports = (knex) => {
         id: id,
         list_id: req.params.id
       };
-      res.status(201).send({point: newPoint});
+      res.status(201).send(/*{point : newPoint} commented out for testing*/);
     });
   });
 
+  router.post("/:id/points/delete", (req, res) => {
+    let pointId = req.body.id;
+    let mapId = req.params.id;
+    knex('points').select('id')
+    .where({id: pointId})
+    .del()
+    .then((count)=>{
+      res.status(201).send();
+      //res.redirect(`/${mapId}`);
+    });
+  });
+
+  router.post("/:id/points/update", (req, res) => {
+    const
+    const { id, name, lat, long } = req.body;
+    knex('points')
+    .where({'id' : id})
+    .update({
+      'name' : name,
+      'lat'  : lat,
+      'long' : long
+    }).then(()=>{
+      res.status(201).send();
+    });
+  });
 
   return router;
 
