@@ -35,8 +35,7 @@ module.exports = (knex) => {
       name: listName
     })
     .returning('id')
-    .then
-    ((id) => {
+    .then((id) => {
       res.redirect(`/maps/${id}`);
     });
   });
@@ -52,8 +51,10 @@ module.exports = (knex) => {
   });
 
   router.get("/:id/points", (req, res) => {
-    knex('points').where('list_id', req.params.id).then(points => {
-      res.json(points);
+    knex('points')
+    .where('list_id', req.params.id)
+    .then((points) => {
+      res.status(201).send(points);
     })
   });
 
