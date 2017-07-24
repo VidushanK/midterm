@@ -16,6 +16,10 @@ tinyMapp helps users create lists of their favorite places and list them under a
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
 
+## Screenshots
+![Screenshot of home page](https://github.com/sanjanadesai27/midterm/blob/master/public/screenshots/homepage.png)
+![Screenshot of map page](https://github.com/sanjanadesai27/midterm/blob/master/public/screenshots/mappage.png)
+
 ## Dependencies
 
 - Node 5.10.x or above
