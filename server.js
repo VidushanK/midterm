@@ -39,18 +39,13 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Home page
+//Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.redirect('/maps');
+  // res.render("index");
 });
 
-// app.get('/register', (req,res) => {
-//   res.render("register");
-// });
 
-// app.get('/login', (req,res) => {
-//   res.render("login");
-// });
 
 // Mount all resource routes
 app.use("/register",register);
