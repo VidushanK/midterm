@@ -16,3 +16,14 @@
 .form-horizontal {
   padding-top: 15px;
 }
+.col-sm-11{
+  margin-top: 20px;
+}
+.h3{
+  text-decoration: none;
+  color: white;
+}
+.h3:hover{
+  text-decoration: none;
+  color:lightgray;
+}
