@@ -1,14 +1,14 @@
 $(document).ready(function(){
     // For creating content of infoWindow
-    function createWindowContent(pointObj, buttonVal, visibility) {
+    function createWindowContent(pointObj, disDelete, disSubmit) {
       return `<div>
         <form id="info_window_input" action="/maps/${mapId}/points" method="post">
           <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
           <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
-          <input type="submit" value="${buttonVal}" class="info_window_button">
+          <input type="submit" value="Submit" class="info_window_button" style="display:${disSubmit}">
         </form>
-        <button class="info_window_delete_button" style="display:${visibility}">Delete</button>
+        <button class="info_window_delete_button" style="display:${disDelete}">Delete</button>
       </div>`;
     }
 
@@ -31,28 +31,10 @@ $(document).ready(function(){
       })
     }
 
-    function updatePoint(event){
-      event.preventDefault();
-      const data = event.data;
-      const $form = $(this);
-      var newValue = {
-        id: data.id,
-        name: $form.name,
-        lat: $form.lat,
-        long: $form.long
-      };
-      $.ajax({
-        type: 'POST',
-        url: `/maps/${mapId}/points/update`,
-        data: $.param(newValue)
-      }).done(() => {
-        loadMap(mapId);
-      })
-    }
-
     function deletePoint(event){
       event.preventDefault();
       const data = event.data;
+      console.log($.param(data));
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points/delete`,
@@ -75,7 +57,6 @@ $(document).ready(function(){
       marker = new google.maps.Marker({
         position: {lat: Number(pointObj.lat), lng: Number(pointObj.long)},
         map: map,
-        draggable: true
       });
 
       if(pointObj.id){
@@ -87,23 +68,17 @@ $(document).ready(function(){
           infoWindow.close();
           marker.setPosition({lat: this.getPosition().lat(),lng: this.getPosition().lng()});
           var content = '';
-          if(pointObj.id){
-            content = createWindowContent(pointObj, "Update", "block");
-            $('#info_window_input').on('submit', pointObj, updatePoint);
+          if (pointObj.id){
+            content = createWindowContent(pointObj, "block", "none");
           } else {
-            content = createWindowContent(pointObj, "Submit", "none");
-            $('#info_window_input').on('submit', postPoint);
+            content = createWindowContent(pointObj, "none", "block");
           }
+          $('#info_window_input').on('submit', postPoint);
           $('.info_window_delete_button').on('click', pointObj, deletePoint);
           infoWindow.setContent(content);
           infoWindow.open(map, marker);
         }
       })(marker, pointObj))
-
-      google.maps.event.addListener(marker, 'dragend', function(event){
-         $('.info_window_lat').val(this.getPosition().lat());
-         $('.info_window_lng').val(this.getPosition().lng());
-       })
     }
 
     // map options

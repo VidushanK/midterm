@@ -51,7 +51,7 @@ module.exports = (knex) => {
     knex('points')
     .where('list_id', req.params.id)
     .then((points) => {
-      res.render("index",{points: points});
+      res.json(points);
     });
   });
 
