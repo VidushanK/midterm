@@ -62,6 +62,9 @@ font-size: 30px;
 .remove {
   margin-left: 350px;
 }
+a.col-sm-1{
+  white-space: nowrap;
+}
 input[type=submit].btn-block{
   margin-left: 190px;
   width: 320px;
