@@ -63,3 +63,7 @@ font-size: 30px;
 .remove {
   margin-left: 350px;
 }
+input[type=submit].btn-block{
+  margin-left: 190px;
+  width: 320px;
+  }
