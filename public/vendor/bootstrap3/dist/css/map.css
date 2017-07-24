@@ -5,11 +5,13 @@ body {
   background-color: #ede8e8;
   height: 100%;
   font-size: 20px;
+  background-image: url("http://static1.crated.com/MEZC93Q3GpnRF3Izq6BUahg8Zfs=/fit-in/960x960/filters:quality(90)/crated/thumbs/art/2016/11/04/18f7caa1708f6ee41144a61624ad61a8/960.jpg");
 }
   main.body-wrapper {
     padding-bottom: 100%;
     background-color: white;
     margin: 130px auto;
+    opacity: 0.9;
     width:700px;
   }
 .mapNameContainer{
@@ -28,7 +30,7 @@ body {
 }
 .body-wrapper h4{
 padding-right: 100px;
-text-decoration: underline;
+
 text-align: center;
 
 font-weight: bold;
@@ -37,7 +39,7 @@ font-size: 30px;
 }
 .mapNameContainer a{
   font-size: 25px;
-  color:blue;
+  color:#a50000;
 
 }
 .body-wrapper ul{
