@@ -25,9 +25,6 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/new",(req, res) => {
-    res.render("maps_new");
-  });
 
   router.post("/",(req, res) => {
     var listName = req.body.mapname;
@@ -54,8 +51,8 @@ module.exports = (knex) => {
     knex('points')
     .where('list_id', req.params.id)
     .then((points) => {
-      res.status(201).send(points);
-    })
+      res.render("index",{points: points});
+    });
   });
 
   router.post("/:id/points", (req, res) => {
@@ -71,7 +68,7 @@ module.exports = (knex) => {
         id: id,
         list_id: req.params.id
       };
-      res.status(201).send(/*{point : newPoint} commented out for testing*/);
+      res.redirect(`/maps/${req.params.id}`)
     });
   });
 
@@ -82,24 +79,10 @@ module.exports = (knex) => {
     .where({id: pointId})
     .del()
     .then((count)=>{
-      res.status(201).send();
-      //res.redirect(`/${mapId}`);
+      res.redirect(`/maps/${mapId}`);
     });
   });
 
-  router.post("/:id/points/update", (req, res) => {
-    const
-    const { id, name, lat, long } = req.body;
-    knex('points')
-    .where({'id' : id})
-    .update({
-      'name' : name,
-      'lat'  : lat,
-      'long' : long
-    }).then(()=>{
-      res.status(201).send();
-    });
-  });
 
   return router;
 
