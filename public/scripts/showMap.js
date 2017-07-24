@@ -36,7 +36,7 @@ $(document).ready(function(){
       const $form = $(this);
       $.ajax({
         type: 'POST',
-        url: `/maps/${mapId}/points`,
+        url: `/maps/${mapId}/points/delete`,
         data: $form.serialize()
       });
     }
