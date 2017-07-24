@@ -55,6 +55,16 @@ module.exports = (knex) => {
     });
   });
 
+  router.post("/:id/points/delete", (req, res) => {
+    var id = req.body.id;
+    knex('points')
+    .where("id", id)
+    .del()
+    .then((count)=>{
+      res.redirect(`/maps/${req.params.id}`);
+    });
+  });
+
   router.post("/:id/points", (req, res) => {
     const { name, lat, long } = req.body;
     knex('points').insert({
@@ -72,18 +82,5 @@ module.exports = (knex) => {
     });
   });
 
-  router.post("/:id/points/delete", (req, res) => {
-    let pointId = req.body.id;
-    let mapId = req.params.id;
-    knex('points').select('id')
-    .where({id: pointId})
-    .del()
-    .then((count)=>{
-      res.redirect(`/maps/${mapId}`);
-    });
-  });
-
-
   return router;
-
 }

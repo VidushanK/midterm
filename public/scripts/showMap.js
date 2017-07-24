@@ -2,13 +2,17 @@ $(document).ready(function(){
     // For creating content of infoWindow
     function createWindowContent(pointObj, disDelete, disSubmit) {
       return `<div>
-        <form id="info_window_input" action="/maps/${mapId}/points" method="post">
+        <form id="info_window_input" action="/maps/${mapId}/points" method="post" style="display:${disSubmit}">>
           <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
           <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
-          <input type="submit" value="Submit" class="info_window_button" style="display:${disSubmit}">
+          <input type="submit" value="Submit" class="info_window_button">
         </form>
-        <button class="info_window_delete_button" style="display:${disDelete}">Delete</button>
+        <form id="info_window_delete" action="/maps/${mapId}/points/delete" method="post" style="display:${disDelete}">
+          <div>${pointObj.name}</div>
+          <input type="hidden" name="id" value=${pointObj.id}>
+          <input type="submit" value="Delete">
+        </form>
       </div>`;
     }
 
@@ -20,28 +24,21 @@ $(document).ready(function(){
     }
 
     function postPoint(event){
-      event.preventDefault();
       const $form = $(this);
       $.ajax({
         type: 'POST',
         url: `/maps/${mapId}/points`,
         data: $form.serialize()
-      }).done(() => {
-        loadMap(mapId);
-      })
+      });
     }
 
     function deletePoint(event){
-      event.preventDefault();
-      const data = event.data;
-      console.log($.param(data));
+      const $form = $(this);
       $.ajax({
         type: 'POST',
-        url: `/maps/${mapId}/points/delete`,
-        data: $.param(data)
-      }).done(()=>{
-        loadMap(mapId);
-      })
+        url: `/maps/${mapId}/points`,
+        data: $form.serialize()
+      });
     }
 
     function loadMap(mapId){
@@ -63,9 +60,12 @@ $(document).ready(function(){
         createListItem(pointObj);
       }
 
+      console.log(pointObj);
+
       google.maps.event.addListener(marker, 'click', (function(marker, pointObj){
         return function(){
           infoWindow.close();
+          console.log(pointObj);
           marker.setPosition({lat: this.getPosition().lat(),lng: this.getPosition().lng()});
           var content = '';
           if (pointObj.id){
@@ -74,7 +74,7 @@ $(document).ready(function(){
             content = createWindowContent(pointObj, "none", "block");
           }
           $('#info_window_input').on('submit', postPoint);
-          $('.info_window_delete_button').on('click', pointObj, deletePoint);
+          $('#info_window_delete').on('submit', deletePoint);
           infoWindow.setContent(content);
           infoWindow.open(map, marker);
         }
