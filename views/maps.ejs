@@ -13,6 +13,7 @@
     <link href="/vendor/bootstrap3/dist/css/header.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/vendor/bootstrap3/dist/css/map.css">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+      <script type="text/javascript" src="/scripts/checkLimit.js"></script>
     <title> Map </title>
   </head>
   <body>
@@ -21,7 +22,7 @@
       <main class ="body-wrapper">
         <form class="new-map-form" action="/maps" method="POST">
           <textarea name="mapname" class="form-group" placeholder="Enter the name of your map"></textarea>
-
+          <span class="errMsg label label-danger"></span>
           <input class="width btn btn-danger black-background white btn-block"type="submit" value="Create Map">
         </form>
         <br>

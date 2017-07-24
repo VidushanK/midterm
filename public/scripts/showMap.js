@@ -2,7 +2,7 @@ $(document).ready(function(){
     // For creating content of infoWindow
     function createWindowContent(pointObj, disDelete, disSubmit) {
       return `<div>
-        <form id="info_window_input" action="/maps/${mapId}/points" method="post" style="display:${disSubmit}">>
+        <form id="info_window_input" action="/maps/${mapId}/points" method="post" style="display:${disSubmit}">
           <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
           <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
