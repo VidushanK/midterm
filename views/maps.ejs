@@ -14,25 +14,15 @@
     <link rel="stylesheet" href="/vendor/bootstrap3/dist/css/map.css">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <title> Map </title>
-    <style>
-
-    </style>
   </head>
   <body>
     <div class="container">
-      <header class ="header-wrapper">
-        <div class="col-sm-11">
-          <h3> tinyMapp </h3>
-        </div>
-        <form class="form-horizontal" action='/logout' method='POST'>
-            <button type="submit" class="btn btn-default">Logout</button>
-        </form>
-      </header>
+        <% include partials/_header %>
       <main class ="body-wrapper">
         <form class="new-map-form" action="/maps" method="POST">
           <textarea name="mapname" class="form-group" placeholder="Enter the name of your map"></textarea>
 
-          <input class="btn btn-danger black-background white btn-block"type="submit" value="Create Map">
+          <input class="width btn btn-danger black-background white btn-block"type="submit" value="Create Map">
         </form>
         <br>
         <section class ="mapNameContainer">

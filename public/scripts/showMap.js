@@ -6,16 +6,15 @@ $(document).ready(function(){
           <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
           <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
           <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
-          <input type="submit" value="Submit" class="info_window_button">
+          <input type="submit" value="Submit" class="info_window_button btn btn-primary">
         </form>
         <form id="info_window_delete" action="/maps/${mapId}/points/delete" method="post" style="display:${disDelete}">
-          <div>${pointObj.name}</div>
+          <div class="textarea-delete">${pointObj.name}</div>
           <input type="hidden" name="id" value=${pointObj.id}>
-          <input type="submit" value="Delete">
+          <input class="btn btn-danger"type="submit" value="Delete">
         </form>
       </div>`;
     }
-
     function createListItem(pointObj){
       var $listItem =  `<div>
         <span>${pointObj.name}</span>
