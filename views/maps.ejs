@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/vendor/bootstrap3/dist/css/map.css">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
       <script type="text/javascript" src="/scripts/checkLimit.js"></script>
-    <title> Map </title>
+    <title>tinyMapp</title>
   </head>
   <body>
     <div class="container">
@@ -27,14 +27,14 @@
         </form>
         <br>
         <section class ="mapNameContainer">
-          <h4>Check dem maps out</h4>
+          <h4 style="padding-bottom: 20px">Check dem maps out</h4>
           <div class ="container">
             <ul>
               <div class = "col">
               <% for(var id in maps) { %>
               <li class="item">
               <a class="col-sm-1" name="listname" href="/maps/<%=maps[id].id%>"> <%=maps[id].name%> </a>
-              <form method="POST" action="/maps/<%=maps[id].id%>/delete">
+              <form method="POST" action="/maps/<%=maps[id].id%>/delete" class="form-inline">
                 <button class=" color remove btn btn-danger background glyphicon glyphicon-remove" ></button>
               </form>
               </li>
