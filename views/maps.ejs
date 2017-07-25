@@ -31,14 +31,14 @@
           <div class ="container">
             <ul>
               <div class = "col">
-              <% for(var id in maps) { %>
-              <li class="item">
-              <a class="col-sm-1" name="listname" href="/maps/<%=maps[id].id%>"> <%=maps[id].name%> </a>
-              <form method="POST" action="/maps/<%=maps[id].id%>/delete" class="form-inline">
-                <button class=" color remove btn btn-danger background glyphicon glyphicon-remove" ></button>
-              </form>
-              </li>
-              <% }; %>
+                <% for(var id in maps){ %>
+                  <li class="item">
+                  <a class="col-sm-1" name="listname" href="/maps/<%=maps[id].id%>"> <%=maps[id].name%> </a>
+                  <form method="POST" action="/maps/<%=maps[id].id%>/delete" class="form-inline">
+                    <button class=" color remove btn btn-danger background glyphicon glyphicon-remove" ></button>
+                  </form>
+                  </li>
+                <% }; %>
             </div>
             </ul>
           </div>

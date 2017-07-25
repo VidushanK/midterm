@@ -2,19 +2,20 @@ $(document).ready(function(){
     // For creating content of infoWindow
     function createWindowContent(pointObj, disDelete, disSubmit) {
       return `<div>
-        <form id="info_window_input" action="/maps/${mapId}/points" method="post" style="display:${disSubmit}">
-          <textarea class="info_window_textarea" name="name">${pointObj.name}</textarea>
-          <input type="hidden" name="lat" class="info_window_lat" value=${pointObj.lat}>
-          <input type="hidden" name="long" class="info_window_lng" value=${pointObj.long}>
+        <form id="info_window_input" action="/maps/${sanitize(mapId)}/points" method="post" style="display:${disSubmit}">
+          <textarea class="info_window_textarea" name="name">${sanitize(pointObj.name)}</textarea>
+          <input type="hidden" name="lat" class="info_window_lat" value=${sanitize(pointObj.lat)}>
+          <input type="hidden" name="long" class="info_window_lng" value=${sanitize(pointObj.long)}>
           <input type="submit" value="Submit" class="info_window_button btn btn-primary">
         </form>
         <form id="info_window_delete" action="/maps/${mapId}/points/delete" method="post" style="display:${disDelete}">
-          <div class="textarea-delete">${pointObj.name}</div>
-          <input type="hidden" name="id" value=${pointObj.id}>
+          <div class="textarea-delete">${sanitize(pointObj.name)}</div>
+          <input type="hidden" name="id" value=${sanitize(pointObj.id)}>
           <input class="btn btn-danger"type="submit" value="Delete">
         </form>
       </div>`;
     }
+
     function createListItem(pointObj){
       var $listItem =  `<div>
         <span>${pointObj.name}</span>

@@ -29,14 +29,15 @@ module.exports = (knex) => {
   router.post("/",(req, res) => {
     var listName = req.body.mapname;
     if( listName.length === 0){
-      res.redirect('/maps')
-    } else {
+      return res.redirect('/maps')
+    }
+    else {
       knex('lists').insert({
         name: listName
       })
       .returning('id')
       .then((id) => {
-        res.redirect(`/maps/${id}`);
+        return res.redirect(`/maps/${id}`);
       });
     }
   });
